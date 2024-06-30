@@ -1,4 +1,4 @@
-FROM php:8-fpm-alpine
+FROM php:8-fpm-alpine3.13
 RUN apk update \
  && apk upgrade \
  && apk add \
@@ -6,6 +6,7 @@ RUN apk update \
         $PHPIZE_DEPS \
  && pecl install xdebug \
  && docker-php-ext-enable xdebug \
+ && docker-php-ext-install mysqli \
  && docker-php-ext-install pdo_mysql \
  && apk del $PHPIZE_DEPS \
  && rm -rf /var/cache/apk/*
